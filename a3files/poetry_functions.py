@@ -42,12 +42,23 @@ def get_poem_lines(poem):
     Return the non-blank, non-empty lines of poem, with whitespace removed
     from the beginning and end of each line.
 
-    >>> get_poem_lines('The first line leads off,\n\n\n'
-    ... + 'With a gap before the next.\nThen the poem ends.\n')
-    ['The first line leads off,', 'With a gap before the next.', 'Then the poem ends.']
+    # >>> get_poem_lines('The first line leads off,\n\n\n'
+    # ... + 'With a gap before the next.\nThen the poem ends.\n')
+    # ['The first line leads off,', 'With a gap before the next.', 'Then the poem ends.']
     """
-    result = poem.split("\n")
-    return result
+
+    poem = ('.........#(*&_$@(*&$)@$\n', '!!!!!???><?><??><#!\n', '     \n')
+
+    # result = poem.split("\n")
+    # return result
+
+    non_empty_lines = []
+    poem_list = poem.split('\n')
+    for i in range(len(poem_list)):
+        #  to append only if the string is not empty.
+        if poem_list[i].strip() != '':
+            non_empty_lines.append(poem_list[i].strip())
+    return non_empty_lines
 
 
 ########### https://www.reddit.com/r/CompSciPortfolio/comments/303fpv/assignment_3_poetry_functions/
@@ -90,11 +101,15 @@ def last_phonemes(phoneme_list):
 
     ################## https://stackoverflow.com/questions/29402908/return-a-list-that-contains-the-last-vowel-phoneme-and-subsequent-consonant-phon
 
-    for i, phoneme in reversed(list(enumerate(phoneme_list))):
-        if phoneme[-1] in '012':
-            return phoneme_list[i:]
-    return []
+    # for i, phoneme in reversed(list(enumerate(phoneme_list))):
+    #     if phoneme[-1] in '012':
+    #         lst = phoneme_list[i:]
+    # return lst
 
+    for phoneme in range(len(phoneme_list)):
+        if phoneme_list[phoneme][-1].isdigit():
+            last_stress = phoneme_list[phoneme:]
+    return last_stress
 
 def check_syllable_counts(poem_lines, pattern, word_to_phonemes):
     r""" (list of str, poetry pattern, pronunciation dictionary) -> list of str
@@ -104,6 +119,9 @@ def check_syllable_counts(poem_lines, pattern, word_to_phonemes):
     Return a list of lines from poem_lines that do not have the right number of
     syllables for the poetry pattern according to the pronunciation dictionary.
     If all lines have the right number of syllables, return the empty list.
+
+    # >>> pattern = ([5, 7, 5], ['*', '*', '*'])           ############## The actual pattern !!! ################
+
 
     >>> poem_lines = ['The first line leads off,',
     ...               'With a gap before the next.', 'Then the poem ends.']
@@ -181,34 +199,19 @@ def check_rhyme_scheme(poem_lines, pattern, word_to_phonemes):
     [['The first line leads off,', 'Then the poem ends.']]
     """
     no_rhyme_full = []
-    # # tester is used to ensure that no line is checked twice.
-    # tester = make_tester(poem_lines)
+
     for line in range(len(poem_lines)):
         no_rhyme = []
-        check = True
-        # phonemes_of_word = last_word_phonemes(line, poem_lines, word_to_phonemes)
+        for i in range(len(pattern[1])):
+            if pattern[1][i] == pattern[1][line]:
 
-        # last_stress = last_stress_finder(phonemes_of_word)
-        line_to_check = 0
-        while check and line_to_check < len(poem_lines):
-            # Compares to '*' because we don't care when it is '*'.
-            if pattern[1][line] == pattern[1][line_to_check] and pattern[1][line_to_check] != '*':
-                phonemes_of_word = last_phonemes(line_to_check, poem_lines, word_to_phonemes)
-                # Will check if the last stress of the last word of poem_lines[line] is equal to the phonemes of the last word of poem_lines[line_to_check]
-                # check = match(last_stress, phonemes_of_word)
-            line_to_check += 1
-            # if not check and tester[line] == 0:
-            no_rhyme = []
-            for i in range(len(pattern[1])):
-                if pattern[1][i] == pattern[1][line]:
-                    # Value of tester[i] is changed because it indicates that
                     # the specific line in poem_lines has already been checked.
                     # tester[i] = 1
                     no_rhyme.append(poem_lines[i])
         # Only want to append to no_rhyme_full if the list is not empty.
-        if no_rhyme != []:
-            no_rhyme_full.append(no_rhyme)
-        no_rhyme = []
+    if no_rhyme != []:
+        no_rhyme_full.append(no_rhyme)
+        #  no_rhyme = []
     return no_rhyme_full
 
 

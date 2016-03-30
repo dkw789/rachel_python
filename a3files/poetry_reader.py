@@ -36,19 +36,7 @@ def read_pronunciation(pronunciation_file):
     return pronunciation_dictionary
 
 
-# def read_poetry_form_description(poetry_forms_file):
-# poetry_pattern = ()
-# syllables = []
-# rhyme = []
-# line = poetry_forms_file.readline()
-# while line != '\n' and line != '':
-#     stripped_line = line.strip()
-#     separation = stripped_line.find(' ')
-#     syllables.append(int(stripped_line[:separation]))
-#     rhyme.append(stripped_line[(separation + 1):])
-#     line = poetry_forms_file.readline()
-# poetry_pattern = (syllables, rhyme)
-# return poetry_pattern
+
 
 
 
@@ -58,6 +46,20 @@ def read_poetry_form_descriptions(poetry_forms_file):
     Return a dictionary of poetry form name to poetry pattern for the
     poetry forms in poetry_forms_file.
     """
+
+    def read_poetry_form_description(poetry_forms_file):
+        poetry_pattern = ()
+        syllables = []
+        rhyme = []
+        line = poetry_forms_file.readline()
+        while line != '\n' and line != '':
+            stripped_line = line.strip()
+            separation = stripped_line.find(' ')
+            syllables.append(int(stripped_line[:separation]))
+            rhyme.append(stripped_line[(separation + 1):])
+            line = poetry_forms_file.readline()
+        poetry_pattern = (syllables, rhyme)
+        return poetry_pattern
 
     dictionary = {}
     line = poetry_forms_file.readline()
