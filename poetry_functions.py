@@ -51,19 +51,19 @@ def get_poem_lines(poem):
     """
 
 
-    result = poem.split("\n")
-    return result
+    # result = poem.split("\n")
+    # return result
 
 
     # poem = ('.........#(*&_$@(*&$)@$\n', '!!!!!???><?><??><#!\n', '     \n')
     non_empty_lines = []
     poem_list = poem.split('\n')
-    # for i in range(len(poem_list)):
-    #     #  to append only if the string is not empty.
-    #
-    #     if poem_list[i].strip() != '':
-    #         non_empty_lines.append(poem_list[i].strip())
-    # return non_empty_lines
+    for i in range(len(poem_list)):
+        #  to append only if the string is not empty.
+
+        if poem_list[i].strip() != '':
+            non_empty_lines.append(poem_list[i].strip())
+    return non_empty_lines
 
 
 ########### https://www.reddit.com/r/CompSciPortfolio/comments/303fpv/assignment_3_poetry_functions/
