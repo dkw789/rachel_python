@@ -24,28 +24,28 @@ def read_pronunciation(pronunciation_file):
 
     #################   https://m.reddit.com/r/CompSciPortfolio/comments/303fyo/assignment_3_poetry_reader/
 
-    # pronunciation_dictionary = {}
-    # line = pronunciation_file.readline()
-    # while line.startswith(';;;'):
-    #     line = pronunciation_file.readline()
-    # while line != '':
-    #     stripped_line = line.strip()
-    #     separation = stripped_line.find(' ')
-    #     pronunciation_dictionary[stripped_line[:separation]] = stripped_line[(separation + 2):].split()
-    #     line = pronunciation_file.readline()
-    # return pronunciation_dictionary
+    pronunciation_dictionary = {}
+    line = pronunciation_file.readline()
+    while line.startswith(';;;'):
+        line = pronunciation_file.readline()
+    while line != '':
+        stripped_line = line.strip()
+        separation = stripped_line.find(' ')
+        pronunciation_dictionary[stripped_line[:separation]] = stripped_line[(separation + 2):].split()
+        line = pronunciation_file.readline()
+    return pronunciation_dictionary
 
 
 
-    my_list = {}
-    for line in pronunciation_file.readlines():
-        line = line.strip()
-        if line and ";;;" not in line:
-            r = line.split()
-            word = r[0]
-            phonemes = r[1:]
-            my_list[word] = phonemes
-    return my_list
+    # my_list = {}
+    # for line in pronunciation_file.readlines():
+    #     line = line.strip()
+    #     if line and ";;;" not in line:
+    #         r = line.split()
+    #         word = r[0]
+    #         phonemes = r[1:]
+    #         my_list[word] = phonemes
+    # return my_list
 
 
 def read_poetry_form_descriptions(poetry_forms_file):

@@ -53,18 +53,7 @@ class TestCheckSyllableCounts(unittest.TestCase):
         """Test check_syllable_counts with no syllable requirements and multiple lines each with multiple words. Multiple lines are being tested in this
         case."""
         pattern = ([0, 0, 0], ['A', 'B', 'A'])
-        # word_to_phonemes = {'THEN': ['DH', 'EH1', 'N'],
-        #                     'ENDS': ['EH1', 'N', 'D', 'Z'],
-        #                     'WITH': ['W', 'IH1', 'DH'],
-        #                     'THE':  ['DH', 'AH0'],
-        #                     'A': ['AH0'],
-        #                     'POEM': ['P', 'OW1', 'AH0', 'M'],
-        #                     'FIRST': ['F', 'ER1', 'S', 'T'],
-        #                     'LEADS': ['L', 'IY1', 'D', 'Z'],
-        #                     'LINE': ['L', 'AY1', 'N'],
-        #                     'NEXT': ['N', 'EH1', 'K', 'S', 'T'],
-        #                     'BEFORE': ['B', 'IH0', 'F', 'AO1', 'R'],
-        #                     'OFF': ['AO1', 'F']}
+
 
         word_to_phonemes = {'THE': ['DH', 'AH0'],
                             'FIRST': ['F', 'ER1', 'S', 'T'],

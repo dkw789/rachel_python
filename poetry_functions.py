@@ -47,7 +47,9 @@ def get_poem_lines(poem):
 
     # >>> get_poem_lines('The first line leads off,\n\n\n'
     # ... + 'With a gap before the next.\nThen the poem ends.\n')
-    # ['The first line leads off,', 'With a gap before the next.', 'Then the poem ends.']
+    # ['The first line leads off,',
+     ' With a gap before the next.',
+      'Then the poem ends.']
     """
 
 
@@ -55,18 +57,15 @@ def get_poem_lines(poem):
     # return result
 
 
-    # poem = ('.........#(*&_$@(*&$)@$\n', '!!!!!???><?><??><#!\n', '     \n')
-    non_empty_lines = []
+    final_poem=[]
     poem_list = poem.split('\n')
     for i in range(len(poem_list)):
         #  to append only if the string is not empty.
 
         if poem_list[i].strip() != '':
-            non_empty_lines.append(poem_list[i].strip())
-    return non_empty_lines
+            final_poem.append(poem_list[i].strip())
+    return final_poem
 
-
-########### https://www.reddit.com/r/CompSciPortfolio/comments/303fpv/assignment_3_poetry_functions/
 
 
 def count_vowel_phonemes(phonemes):
@@ -80,13 +79,12 @@ def count_vowel_phonemes(phonemes):
 
     """
 
-    ####################################################https: // stackoverflow.com / questions / 29322310 / count - items - using - nested - loops
 
 
     number_of_vowel_phonemes = 0
     for phoneme in phonemes:
         for item in phoneme:
-            # if 0 or 1 or 2 in item:
+            # if  phoneme ends in 0, 1, or 2 the it's a vowel phoneme
             if "0" in item or "1" in item or "2" in item:
                 number_of_vowel_phonemes = number_of_vowel_phonemes + 1
     return number_of_vowel_phonemes
@@ -104,21 +102,16 @@ def last_phonemes(phoneme_list):
     ['IH0', 'N']
     """
 
-    ################## https://stackoverflow.com/questions/29402908/return-a-list-that-contains-the-last-vowel-phoneme-and-subsequent-consonant-phon
-
-    # for i, phoneme in reversed(list(enumerate(phoneme_list))):
-    #     if phoneme[-1] in '012':
-    #         lst = phoneme_list[i:]
-    # return lst
 
     if phoneme_list:
         for phoneme in range(len(phoneme_list)):
             if phoneme_list[phoneme][-1].isdigit():
-                last_stress = phoneme_list[phoneme:]
+                last_vowel = phoneme_list[phoneme:]
 
-        return last_stress
+        return last_vowel
 
     else:
+        #else if all constanant return blank
         return []
 
 def check_syllable_counts(poem_lines, pattern, word_to_phonemes):
@@ -156,25 +149,26 @@ def check_syllable_counts(poem_lines, pattern, word_to_phonemes):
     []
     """
     wrong_number_syllables = []
-    full_words = []
+    # Splitting poem into lines
     for line in range(len(poem_lines)):
         syllables = 0
         words = poem_lines[line].split()
-        full_words = []
+        cleaned_words = []
         for i in range(len(words)):
             # Only want to append strings that are not empty.
             if clean_up(words[i].strip()) != '':
-                full_words.append(clean_up(words[i].strip()))
-        # Search through every phoneme and add 1 each time a stress is found.
-        for word in range(len(full_words)):
-            phonemes_of_word = word_to_phonemes[full_words[word]]
+                cleaned_words.append(clean_up(words[i].strip()))
+        # Search through every phoneme and increment by one each time a vowel is found.
+        for word in range(len(cleaned_words)):
+            phonemes_of_word = word_to_phonemes[cleaned_words[word]]
             for phoneme in phonemes_of_word:
                 if phoneme[-1].isdigit():
                     syllables += 1
-        # Also comparing to 0 because we don't care when it is 0.
+        # Also comparing to 0 because we want to find those which are not matching
         if syllables != pattern[0][line] and pattern[0][line] != 0:
             wrong_number_syllables.append(poem_lines[line])
     return wrong_number_syllables
+
 
 
 def check_rhyme_scheme(poem_lines, pattern, word_to_phonemes):
@@ -214,9 +208,6 @@ def check_rhyme_scheme(poem_lines, pattern, word_to_phonemes):
         no_rhyme = []
         for i in range(len(pattern[1])):
             if pattern[1][i] == pattern[1][line]:
-
-                    # the specific line in poem_lines has already been checked.
-                    # tester[i] = 1
                     no_rhyme.append(poem_lines[i])
         # Only want to append to no_rhyme_full if the list is not empty.
     if no_rhyme != []:

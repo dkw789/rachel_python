@@ -110,7 +110,7 @@ def main():
     print('=================================================')
     prompt = \
         'Enter number for poetry form to check (0 to quit):\n{}'.format(menu)
-    form_num = input(prompt)
+    f1orm_num = input(prompt)
 
     while form_num != '' and form_num != '0':
         if form_num in menu_dict.keys():

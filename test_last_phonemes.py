@@ -16,7 +16,7 @@ class TestLastPhonemes(unittest.TestCase):
 
     def test_single_line(self):
 
-        phoneme_list = [ 'EH1', 'N', 'D', 'Z']
+        phoneme_list = [ 'N','EH1', 'N', 'D', 'Z']
 
 
         actual = poetry_functions.last_phonemes(phoneme_list)
@@ -47,7 +47,7 @@ class TestLastPhonemes(unittest.TestCase):
 
 
 
-    def test_consecutive_phonemes(self):
+    def test_consecutive_vowels_phonemes(self):
 
         phoneme_list = ['DH', 'AH0',
                         'F', 'ER1', 'S', 'T',
